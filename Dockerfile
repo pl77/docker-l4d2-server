@@ -19,13 +19,11 @@ RUN set -x \
 COPY ./csgo_ds.txt $SERVER/csgo_ds.txt
 COPY ./autoexec.cfg $SERVER/csgo/cfg/autoexec.cfg
 COPY ./server.cfg $SERVER/csgo/cfg/server.cfg
-COPY ./csgo.sh $SERVER/csgo.sh
 
 RUN chown -R $USER:$USER $SERVER && chmod +x $SERVER/*.sh
-
 USER $USER
 
-RUN curl http://media.steampowered.com/client/steamcmd_linux.tar.gz | tar -C /home/$USER -xz \
+RUN curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz  | tar -C /home/$USER -xz \
     && mkdir -p /home/$USER/.steam/sdk32
 COPY ./srcds_run $SERVER/srcds_run
 # srcds cant find steamclient.so, copy it locally && srcds_run has incorrect autorestart executable (uses steam.sh instead of steamcmd.sh)
@@ -33,6 +31,7 @@ COPY ./srcds_run $SERVER/srcds_run
 EXPOSE 27015/udp
 VOLUME $SERVER/csgo/addons $SERVER/csgo/cfg $SERVER 
 
+COPY ./csgo.sh $SERVER/csgo.sh
 WORKDIR $SERVER
-ENTRYPOINT ["./csgo.sh"]
+ENTRYPOINT ["./csgo.sh","-game csgo"]
 CMD ["-console" "-usercon" "+game_type" "0" "+game_mode" "1" "+mapgroup" "mg_active" "+map" "de_cache"]
