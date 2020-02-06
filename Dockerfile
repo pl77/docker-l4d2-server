@@ -19,6 +19,7 @@ RUN set -x \
 COPY ./csgo_ds.txt $SERVER/csgo_ds.txt
 COPY ./autoexec.cfg $SERVER/csgo/cfg/autoexec.cfg
 COPY ./server.cfg $SERVER/csgo/cfg/server.cfg
+COPY ./csgo.sh $SERVER/csgo.sh
 
 RUN chown -R $USER:$USER $SERVER && chmod +x $SERVER/*.sh
 USER $USER
@@ -31,7 +32,6 @@ COPY ./srcds_run $SERVER/srcds_run
 EXPOSE 27015/udp
 VOLUME $SERVER/csgo/addons $SERVER/csgo/cfg $SERVER 
 
-COPY ./csgo.sh $SERVER/csgo.sh
 WORKDIR $SERVER
 ENTRYPOINT ["./csgo.sh","-game csgo"]
 CMD ["-console" "-usercon" "+game_type" "0" "+game_mode" "1" "+mapgroup" "mg_active" "+map" "de_cache"]
