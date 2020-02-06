@@ -26,7 +26,7 @@ USER $USER
 
 RUN curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz  | tar -C /home/$USER -xz \
     && mkdir -p /home/$USER/.steam/sdk32
-COPY ./srcds_run $SERVER/srcds_run
+COPY ./srcds_run /home/$USER/srcds_run
 # srcds cant find steamclient.so, copy it locally && srcds_run has incorrect autorestart executable (uses steam.sh instead of steamcmd.sh)
 
 EXPOSE 27015/udp
