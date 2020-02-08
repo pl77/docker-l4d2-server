@@ -1,5 +1,0 @@
-login anonymous
-force_install_dir /home/steam/server
-app_update 740
-quit
-
