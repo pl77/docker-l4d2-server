@@ -30,6 +30,9 @@ RUN curl https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz 
     && /home/$USER/steamcmd.sh +quit
 RUN curl https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz | tar -C $SERVER/$APPNAME/ -xz \
     && curl https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6460-linux.tar.gz | tar -C $SERVER/$APPNAME/ -xz 
+
+COPY ./srcds-cache/ $SERVER
+RUN cp /home/$USER/linux32/steamclient.so /home/$USER/.steam/sdk32/steamclient.so
 COPY ./srcds_run /home/$USER/srcds_run
 # srcds cant find steamclient.so, copy it locally && srcds_run has incorrect autorestart executable (uses steam.sh instead of steamcmd.sh)
 
