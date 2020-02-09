@@ -22,9 +22,10 @@ SERVER - where to store data files (steamcmd & csgo dir, defaults to /home/$USER
 You can create new Dockerfile based on that image and customize it with plugins, configs, CMD and ENTRYPOINT instructions.
 
 Also you can create volumes with the `-v` flag that point to the host for these directories:
-* /home/steam/server/left4dead2
-* /home/steam/server/left4dead2/cfg
-* /home/steam/server/left4dead2/addons
+* /data/addons - Copied to the left4dead2 addon folder on start
+* /data/sm-plugins - Copied to sourcemod plugins folder
+* /data/sm-configs - Copied to sourcemod configs folder
+* /data/configs - Copied to sourcemod configs folder
 
 
 ```shell
