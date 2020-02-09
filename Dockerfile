@@ -34,7 +34,7 @@ COPY ./srcds_run /home/$USER/srcds_run
 # srcds cant find steamclient.so, copy it locally && srcds_run has incorrect autorestart executable (uses steam.sh instead of steamcmd.sh)
 
 EXPOSE 27015/udp
-VOLUME $SERVER/$APPNAME/addons $SERVER/$APPNAME/cfg $SERVER 
+VOLUME $SERVER/$APPNAME/addons $SERVER/$APPNAME/cfg /data/addons /data/sm-plugins /data/sm-configs /data/configs $SERVER 
 
 COPY ./entry.sh $SERVER/entry.sh
 WORKDIR $SERVER
